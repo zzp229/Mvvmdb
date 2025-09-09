@@ -25,7 +25,7 @@ namespace Mvvmdb
                 DisableAvaloniaDataAnnotationValidation();
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+                   
                 };
             }
 

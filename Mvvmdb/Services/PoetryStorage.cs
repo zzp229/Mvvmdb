@@ -26,9 +26,14 @@ namespace Mvvmdb.Services
             await Connection.CreateTableAsync<Poetry>();
         }
 
+        /// <summary>
+        /// 插入
+        /// </summary>
+        /// <param name="poetry"></param>
+        /// <returns></returns>
         public async Task InserAsync(Poetry poetry)
         {
-            
+            await Connection.InsertAsync(poetry);
         }
     }
 }
