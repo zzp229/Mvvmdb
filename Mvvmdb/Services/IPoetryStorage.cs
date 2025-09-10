@@ -11,5 +11,8 @@ namespace Mvvmdb.Services
     {
         Task InitializeAsync();
         Task InserAsync(Poetry poetry);
+        Task<List<Poetry>> ListAsync();
+
+        Task<List<Poetry>> QueryAsync(string keyword);
     }
 }

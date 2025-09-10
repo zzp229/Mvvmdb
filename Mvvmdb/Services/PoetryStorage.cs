@@ -35,5 +35,12 @@ namespace Mvvmdb.Services
         {
             await Connection.InsertAsync(poetry);
         }
+
+
+        public async Task<List<Poetry>> ListAsync() => await Connection.Table<Poetry>().ToListAsync();
+
+        public async Task<List<Poetry>> QueryAsync(string keyword) => await Connection.Table<Poetry>()
+                .Where(p => p.Name.Contains(keyword))
+                .ToListAsync();
     }
 }

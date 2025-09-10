@@ -18,6 +18,16 @@
             VerticalAlignment="Center"
             Text="{Binding Message}" />
         <Button Command="{Binding SayHelloCommand}" Content="Click me!" />
+        <Button Command="{Binding InitialCommand}" Content="Initial" />
+        <Button Command="{Binding InsertCommand}" Content="Insert" />
+		<Button Command="{Binding ListCommand}" Content="list"/>
+        <ItemsControl ItemsSource="{Binding Poetries}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </StackPanel>
 
 
