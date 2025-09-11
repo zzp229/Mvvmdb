@@ -36,8 +36,13 @@ namespace Mvvmdb.ViewModels
             Message = "Hello, MVVM!";
         }
 
+        /// <summary>
+        /// 进入这里会卡死，很奇怪
+        /// </summary>
+        /// <returns></returns>
         public async Task InitializeAsync()
         {
+            //int a = 1;
             await _poetryStorage.InitializeAsync();
         }
 

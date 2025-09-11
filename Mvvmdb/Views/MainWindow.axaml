@@ -28,6 +28,9 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+		
+		<!--区域导航-->
+		<TransitioningContentControl Content="{Binding CurrentPage}"/>
     </StackPanel>
 
 

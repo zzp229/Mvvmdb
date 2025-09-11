@@ -14,6 +14,7 @@ namespace Mvvmdb
         private readonly IServiceProvider _serviceProvider;
 
         public MainWindowViewModel MainWindowViewModel => _serviceProvider.GetService<MainWindowViewModel>();
+        public UserControl1ViewModel UserControl1ViewModel => _serviceProvider.GetService<UserControl1ViewModel>();
 
         public ServiceLocator()
         {
@@ -21,6 +22,9 @@ namespace Mvvmdb
 
             serviceCollection.AddSingleton<MainWindowViewModel>();
             serviceCollection.AddSingleton<IPoetryStorage, PoetryStorage>();
+
+            // 注册其他服务和视图模型
+            serviceCollection.AddSingleton<UserControl1ViewModel>();
 
             _serviceProvider = serviceCollection.BuildServiceProvider();    // 建造者方便后面获取服务
         }
