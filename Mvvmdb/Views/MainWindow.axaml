@@ -3,36 +3,31 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="using:Avalonia.Xaml.Interactivity"
+    xmlns:ia="using:Avalonia.Xaml.Interactions.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:Mvvmdb.ViewModels"
     Title="Mvvmdb"
+    Initialized=""
     d:DesignHeight="450"
     d:DesignWidth="800"
-    x:DataType="vm:MainWindowViewModel"
-    DataContext="{Binding MainWindowViewModel, Source={StaticResource ServiceLocator}}"
+    DataContext="{Binding ResultViewModel, Source={StaticResource ServiceLocator}}"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
-    <StackPanel>
-        <TextBlock
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Text="{Binding Message}" />
-        <Button Command="{Binding SayHelloCommand}" Content="Click me!" />
-        <Button Command="{Binding InitialCommand}" Content="Initial" />
-        <Button Command="{Binding InsertCommand}" Content="Insert" />
-		<Button Command="{Binding ListCommand}" Content="list"/>
-        <ItemsControl ItemsSource="{Binding Poetries}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-		
-		<!--区域导航-->
-		<TransitioningContentControl Content="{Binding CurrentPage}"/>
-    </StackPanel>
 
+    <i:Interaction.Behaviors>
+        <ia:EventTriggerBehavior EventName="Initialized" >
+            <ia:InvokeCommandAction Command="{Binding OnInitializedCommand}" />
+        </ia:EventTriggerBehavior>
+    </i:Interaction.Behaviors>
+
+    <ItemsControl ItemsSource="{Binding PoetryCollenction}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding Name}" />
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 
 
 </Window>

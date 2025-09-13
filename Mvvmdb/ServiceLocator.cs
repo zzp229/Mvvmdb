@@ -1,11 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Avalonia;
+using Avalonia.Controls;
+using Microsoft.Extensions.DependencyInjection;
 using Mvvmdb.Services;
 using Mvvmdb.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mvvmdb
 {
@@ -13,20 +11,43 @@ namespace Mvvmdb
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public MainWindowViewModel MainWindowViewModel => _serviceProvider.GetService<MainWindowViewModel>();
-        public UserControl1ViewModel UserControl1ViewModel => _serviceProvider.GetService<UserControl1ViewModel>();
+        private static ServiceLocator _current;
+
+        public static ServiceLocator Current
+        {
+            get
+            {
+                if (_current is not null)
+                {
+                    return _current;
+                }
+
+                if (Application.Current.TryGetResource(nameof(ServiceLocator),
+                        out var resource) &&
+                    resource is ServiceLocator serviceLocator)
+                {
+                    return _current = serviceLocator;
+                }
+
+                throw new Exception("理论上来讲不应该发生这种情况。");
+            }
+        }
+
+        public ResultViewModel ResultViewModel => _serviceProvider.GetRequiredService<ResultViewModel>();
 
         public ServiceLocator()
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddSingleton<MainWindowViewModel>();
+            serviceCollection.AddSingleton<IPreferenceStorage, FilePreferenceStorage>();
+
             serviceCollection.AddSingleton<IPoetryStorage, PoetryStorage>();
 
-            // 注册其他服务和视图模型
-            serviceCollection.AddSingleton<UserControl1ViewModel>();
+            serviceCollection.AddSingleton<ResultViewModel>();
 
-            _serviceProvider = serviceCollection.BuildServiceProvider();    // 建造者方便后面获取服务
+
+            _serviceProvider = serviceCollection.BuildServiceProvider();
         }
+
     }
 }

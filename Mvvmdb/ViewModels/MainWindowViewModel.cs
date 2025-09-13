@@ -17,8 +17,7 @@ namespace Mvvmdb.ViewModels
             _poetryStorage = poetryStorage;
             SayHelloCommand = new RelayCommand(SayHello);
             InitialCommand = new AsyncRelayCommand(InitializeAsync);
-            InsertCommand = new AsyncRelayCommand(InsertAsync);
-            ListCommand = new AsyncRelayCommand(ListAsync);
+
         }
         
 
@@ -48,25 +47,7 @@ namespace Mvvmdb.ViewModels
 
         public ICommand InitialCommand { get; }
 
-        public async Task InsertAsync() =>
-            await _poetryStorage.InserAsync(new Poetry()
-            {
-                Name = "Name" + new Random().Next()
-            });
         
-        public ICommand InsertCommand { get; }
-
-        public ObservableCollection<Poetry> Poetries { get; set; } = new();
-
-        public async Task ListAsync()
-        {
-            var poetries = await _poetryStorage.ListAsync();
-            Poetries.Clear();
-            foreach (var poetry in poetries)
-            {
-                Poetries.Add(poetry);
-            }
-        }
 
         public ICommand ListCommand { get; set; }
 
