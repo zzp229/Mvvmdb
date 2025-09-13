@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="poetrydb.sqlite3" />
-    <EmbeddedResource Include="Services\poetrydb.sqlite3" />
     <PackageReference Include="Avalonia" Version="11.3.0" />
     <PackageReference Include="Avalonia.Desktop" Version="11.3.0" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.0" />

@@ -4,26 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_test"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        DataContext="{Binding MainWindowViewModel, Source={StaticResource ServiceLocator}}"
+        DataContext="{Binding ResultViewModel, Source={StaticResource ServiceLocator}}"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
-        <TextBlock
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center"
-        Text="{Binding Message}" />
-        <Button Command="{Binding SayHelloCommand}" Content="Click me!" />
-        <Button Command="{Binding InitialCommand}" Content="Initial" />
-        <Button Command="{Binding InsertCommand}" Content="Insert" />
-        <Button Command="{Binding ListCommand}" Content="list"/>
-        <ItemsControl ItemsSource="{Binding Poetries}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+    <!-- WPF 中使用 Loaded 事件而不是 Initialized -->
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding OnInitializedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
-        
-    </StackPanel>
+    <ItemsControl ItemsSource="{Binding PoetryCollenction}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding Name}" />
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </Window>

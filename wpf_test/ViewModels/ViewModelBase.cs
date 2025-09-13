@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Mvvmdb.ViewModels
+namespace wpf_test.ViewModels
 {
-    public class UserControl1ViewModel
+    public class ViewModelBase : ObservableObject
     {
     }
 }
