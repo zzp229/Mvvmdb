@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using wpf_test.Services;
+using wpf_test.ViewModels;
 
 namespace wpf_test
 {
@@ -20,6 +22,7 @@ namespace wpf_test
             var serviceCollection = new ServiceCollection();
 
             serviceCollection.AddSingleton<MainWindowViewModel>();
+            serviceCollection.AddSingleton<IPoetryStorage, PoetryStorage>();
 
 
             _serviceProvider = serviceCollection.BuildServiceProvider();

@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SQLite;
+using wpf_test.Models;
+
+namespace wpf_test.Services
+{
+    public class PoetryStorage : IPoetryStorage
+    {
+        public const string DbName = "poetrydb.sqlite3";
+
+        public static readonly string PoetryDbPath = Helpers.PathHelper.GetLocalFilePath(DbName);
+
+        private SQLiteAsyncConnection _connection;
+        private SQLiteAsyncConnection Connection => _connection ??= new SQLiteAsyncConnection(PoetryDbPath);
+
+        public async Task InitializeAsync()
+        {
+              await Connection.CreateTableAsync<Poetry>();
+        }
+
+        public async Task InserAsync(Poetry poetry) => await Connection.InsertAsync(poetry);
+        public async Task<List<Poetry>> ListAsync() => await Connection.Table<Poetry>().ToListAsync();
+        public async Task<List<Poetry>> QueryAsync(string keyword) => await Connection.Table<Poetry>()
+                .Where(p => p.Name.Contains(keyword))
+                .ToListAsync();
+    }
+}
