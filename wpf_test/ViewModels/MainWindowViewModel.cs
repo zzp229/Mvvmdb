@@ -73,7 +73,7 @@ namespace wpf_test.ViewModels
         }
 
         /// <summary>
-        /// 进入这里会卡死，很奇怪
+        /// 确保数据库表存在
         /// </summary>
         /// <returns></returns>
         public async Task InitializeAsync()

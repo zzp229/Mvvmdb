@@ -18,7 +18,8 @@ namespace wpf_test.Helpers
                     return _localFolder;
                 }
                 _localFolder = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), nameof(wpf_test));
-                if (!System.IO.Directory.Exists(_localFolder))
+                //_localFolder = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wpf_test");   // 改成放在应用程序目录下
+                if (!System.IO.Directory.Exists(_localFolder))  
                 {
                     System.IO.Directory.CreateDirectory(_localFolder);
                 }                

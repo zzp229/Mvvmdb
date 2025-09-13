@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mvvmdb.Models
 {
+    [SQLite.Table("works")]
     public class Poetry
     {
         [PrimaryKey, AutoIncrement]

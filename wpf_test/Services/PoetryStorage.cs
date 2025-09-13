@@ -17,6 +17,10 @@ namespace wpf_test.Services
         private SQLiteAsyncConnection _connection;
         private SQLiteAsyncConnection Connection => _connection ??= new SQLiteAsyncConnection(PoetryDbPath);
 
+        /// <summary>
+        /// 创建数据库
+        /// </summary>
+        /// <returns></returns>
         public async Task InitializeAsync()
         {
               await Connection.CreateTableAsync<Poetry>();
